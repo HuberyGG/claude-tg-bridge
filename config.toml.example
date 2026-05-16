@@ -1,0 +1,43 @@
+[telegram]
+# 从 @BotFather 拿
+bot_token = "PASTE_BOT_TOKEN_HERE"
+# 从 getUpdates 拿，是负数，-100 开头
+chat_id = -1001234567890
+# 走代理；如不需要留空字符串 ""
+proxy = "socks5://127.0.0.1:1080"
+
+[ipc]
+host = "127.0.0.1"
+port = 8765
+# 随机字符串；hook 与 daemon 之间的认证
+shared_secret = "REPLACE_WITH_RANDOM_STRING"
+
+[approval]
+# 哪些工具需要审批（其他工具默认放行）
+tools = ["Bash"]
+# 匹配上的 Bash 命令自动放行，无需手机审批
+auto_allow_bash = [
+    "^ls( |$)",
+    "^pwd$",
+    "^cat ",
+    "^grep ",
+    "^rg ",
+    "^git (status|diff|log|show)( |$)",
+]
+# 审批超时的回退动作：ask | allow | deny
+on_timeout = "deny"
+timeout_seconds = 240
+
+[launcher]
+# /new 不带参数时的默认目录
+default_cwd = "~"
+# /new 允许的根目录白名单（候选目录必须在其中一个根之下）
+allowed_cwds = ["~"]
+# daemon 把新会话开到这个 tmux session 里（必须事先存在，否则 daemon 会自建）
+tmux_session = "bridge"
+# 启动命令；可改成 "claude --resume" 或带其他参数
+claude_command = "claude"
+
+[paths]
+registry = "~/claude-tg-bridge/registry.json"
+log = "~/claude-tg-bridge/bridge.log"
